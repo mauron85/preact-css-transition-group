@@ -1,3 +1,3 @@
-import { CSSTransitionGroup } from './CSSTransitionGroup';
+import ReactCSSTransitionGroup from './ReactCSSTransitionGroup';
 
-export default CSSTransitionGroup;
+export default ReactCSSTransitionGroup;
