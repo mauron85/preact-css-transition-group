@@ -3,6 +3,7 @@
 TAG="v15.4.2"
 CURRENT=`pwd`
 SRC_DIR="src"
+REACT_SRC_DIR="src-react"
 
 # Set the variable for bash behavior
 shopt -s nullglob
@@ -24,9 +25,9 @@ chk_files=(${SRC_DIR}/*)
 command -v curl >/dev/null 2>&1 || { echo >&2 "I require curl but it's not installed.  Aborting."; exit 1; }
 
 mkdir -p $SRC_DIR
+mkdir -p $REACT_SRC_DIR
 
 # fetch react transitions
-mkdir -p $SRC_DIR
 pushd $SRC_DIR
 fetch https://raw.githubusercontent.com/facebook/fbjs/master/packages/fbjs/src/__forks__/invariant.js
 fetch https://raw.githubusercontent.com/facebook/fbjs/master/packages/fbjs/src/__forks__/warning.js
@@ -41,6 +42,8 @@ fetch https://raw.githubusercontent.com/facebook/react/${TAG}/src/addons/transit
 fetch https://raw.githubusercontent.com/facebook/react/${TAG}/src/addons/transitions/ReactTransitionEvents.js
 fetch https://raw.githubusercontent.com/facebook/react/${TAG}/src/addons/transitions/ReactTransitionGroup.js
 popd
+
+cp "${SRC_DIR}"/* $REACT_SRC_DIR
 
 ./patches/applypatches.sh "patches"
 
