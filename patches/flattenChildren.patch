@@ -1,0 +1,21 @@
+--- src-react/flattenChildren.js	2017-03-22 11:50:14.783790660 +0100
++++ src/flattenChildren.js	2017-03-22 11:51:02.072450036 +0100
+@@ -12,9 +12,9 @@
+ 
+ 'use strict';
+ 
+-var KeyEscapeUtils = require('KeyEscapeUtils');
+-var traverseAllChildren = require('traverseAllChildren');
+-var warning = require('warning');
++import KeyEscapeUtils from './KeyEscapeUtils';
++import traverseAllChildren from './traverseAllChildren';
++import warning from './warning';
+ 
+ var ReactComponentTreeHook;
+ 
+@@ -99,4 +99,4 @@
+   return result;
+ }
+ 
+-module.exports = flattenChildren;
++export default flattenChildren;

@@ -2,4 +2,5 @@ dist
 node_modules
 npm-debug.log
 tests/preact-versions
-src/__react
+src/
+src-react/

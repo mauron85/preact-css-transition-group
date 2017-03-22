@@ -1,0 +1,14 @@
+--- src-react/utils.js	1970-01-01 01:00:00.000000000 +0100
++++ src/utils.js	2017-03-22 11:53:20.926645134 +0100
+@@ -0,0 +1,11 @@
++export function getKey(vnode) {
++	return vnode.attributes && vnode.attributes.key;
++}
++
++export function getComponentBase(component) {
++	return component.base;
++}
++
++export function onlyChild(children) {
++	return children && children[0];
++}

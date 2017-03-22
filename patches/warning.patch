@@ -1,0 +1,17 @@
+--- src-react/warning.js	2017-03-22 11:50:12.503951736 +0100
++++ src/warning.js	2017-03-22 11:51:02.072450036 +0100
+@@ -11,7 +11,7 @@
+ 
+ 'use strict';
+ 
+-var emptyFunction = require('emptyFunction');
++import emptyFunction from 'fbjs/lib/emptyFunction';
+ 
+ /**
+  * Similar to invariant but only logs a warning if the condition is not met.
+@@ -50,4 +50,4 @@
+   };
+ }
+ 
+-module.exports = warning;
++export default warning;

@@ -4,6 +4,7 @@ import babel from 'rollup-plugin-babel';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import alias from 'rollup-plugin-alias';
+import replace from 'rollup-plugin-replace';
 
 let pkg = JSON.parse(fs.readFileSync('./package.json'));
 
@@ -33,14 +34,17 @@ export default {
 				['transform-react-jsx', { pragma:'h' }]
 			]
 		}),
+		replace({
+			'__DEV__': false
+		}),
 		nodeResolve({
 			jsnext: true,
 			main: true,
 			skip: external
 		}),
 		alias({
-		  invariant: './src/invariant',
-			warning: './src/warning'
+			'./invariant': './src/invariant',
+			'./warning': './src/warning'
 		}),
 		commonjs({
 			include: 'node_modules/**',

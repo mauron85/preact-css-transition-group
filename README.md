@@ -6,3 +6,10 @@ This module may be of use to you if:
 
 - you want to apply CSS transitions when adding or removing elements; or
 - you are getting a "not found" error for `react/lib/ReactCSSTransitionGroup`
+
+
+# Creating patches
+
+```
+$ ./patches/createpatches.sh src-react src
+```

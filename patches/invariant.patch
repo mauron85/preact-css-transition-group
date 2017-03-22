@@ -1,0 +1,8 @@
+--- src-react/invariant.js	2017-03-22 11:50:11.947991016 +0100
++++ src/invariant.js	2017-03-22 11:51:02.072450036 +0100
+@@ -56,4 +56,4 @@
+   }
+ }
+ 
+-module.exports = invariant;
++export default invariant;

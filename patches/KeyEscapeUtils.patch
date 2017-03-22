@@ -1,0 +1,8 @@
+--- src-react/KeyEscapeUtils.js	2017-03-22 11:50:13.643871198 +0100
++++ src/KeyEscapeUtils.js	2017-03-22 11:51:02.072450036 +0100
+@@ -62,4 +62,4 @@
+   unescape: unescape,
+ };
+ 
+-module.exports = KeyEscapeUtils;
++export default KeyEscapeUtils;

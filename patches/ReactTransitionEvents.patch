@@ -1,0 +1,20 @@
+--- src-react/ReactTransitionEvents.js	2017-03-22 11:50:17.679586068 +0100
++++ src/ReactTransitionEvents.js	2017-03-22 11:51:02.072450036 +0100
+@@ -11,9 +11,9 @@
+ 
+ 'use strict';
+ 
+-var ExecutionEnvironment = require('ExecutionEnvironment');
++import ExecutionEnvironment from 'fbjs/lib/ExecutionEnvironment';
+ 
+-var getVendorPrefixedEventName = require('getVendorPrefixedEventName');
++import getVendorPrefixedEventName from './getVendorPrefixedEventName';
+ 
+ var endEvents = [];
+ 
+@@ -70,4 +70,4 @@
+   },
+ };
+ 
+-module.exports = ReactTransitionEvents;
++export default ReactTransitionEvents;

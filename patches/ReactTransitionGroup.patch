@@ -1,0 +1,58 @@
+--- src-react/ReactTransitionGroup.js	2017-03-22 11:50:18.255545376 +0100
++++ src/ReactTransitionGroup.js	2017-03-22 11:51:02.072450036 +0100
+@@ -11,23 +11,23 @@
+ 
+ 'use strict';
+ 
+-var React = require('React');
+-var ReactTransitionChildMapping = require('ReactTransitionChildMapping');
++import { Component, cloneElement, h } from 'preact';
++import ReactTransitionChildMapping from './ReactTransitionChildMapping';
+ 
+-var emptyFunction = require('emptyFunction');
++import emptyFunction from 'fbjs/lib/emptyFunction';
+ 
+ /**
+  * A basis for animations. When children are declaratively added or removed,
+  * special lifecycle hooks are called.
+  * See https://facebook.github.io/react/docs/animation.html#low-level-api-reacttransitiongroup
+  */
+-class ReactTransitionGroup extends React.Component {
++class ReactTransitionGroup extends Component {
+   static displayName = 'ReactTransitionGroup';
+ 
+-  static propTypes = {
+-    component: React.PropTypes.any,
+-    childFactory: React.PropTypes.func,
+-  };
++  // static propTypes = {
++  //   component: React.PropTypes.any,
++  //   childFactory: React.PropTypes.func,
++  // };
+ 
+   static defaultProps = {
+     component: 'span',
+@@ -213,7 +213,7 @@
+         // already been removed. In case you need this behavior you can provide
+         // a childFactory function to wrap every child, even the ones that are
+         // leaving.
+-        childrenToRender.push(React.cloneElement(
++        childrenToRender.push(cloneElement(
+           this.props.childFactory(child),
+           {ref: key, key: key}
+         ));
+@@ -232,7 +232,7 @@
+     delete props.transitionAppearTimeout;
+     delete props.component;
+ 
+-    return React.createElement(
++    return h(
+       this.props.component,
+       props,
+       childrenToRender
+@@ -240,4 +240,4 @@
+   }
+ }
+ 
+-module.exports = ReactTransitionGroup;
++export default ReactTransitionGroup;

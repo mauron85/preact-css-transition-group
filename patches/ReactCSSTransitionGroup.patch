@@ -1,0 +1,70 @@
+--- src-react/ReactCSSTransitionGroup.js	2017-03-22 11:50:15.943708710 +0100
++++ src/ReactCSSTransitionGroup.js	2017-03-22 11:51:02.072450036 +0100
+@@ -11,10 +11,10 @@
+ 
+ 'use strict';
+ 
+-var React = require('React');
++import { Component, cloneElement, h } from 'preact';
+ 
+-var ReactTransitionGroup = require('ReactTransitionGroup');
+-var ReactCSSTransitionGroupChild = require('ReactCSSTransitionGroupChild');
++import ReactTransitionGroup from './ReactTransitionGroup';
++import ReactCSSTransitionGroupChild from './ReactCSSTransitionGroupChild';
+ 
+ function createTransitionTimeoutPropValidator(transitionType) {
+   var timeoutPropName = 'transition' + transitionType + 'Timeout';
+@@ -46,19 +46,19 @@
+  * enters or leaves the DOM.
+  * See https://facebook.github.io/react/docs/animation.html#high-level-api-reactcsstransitiongroup
+  */
+-class ReactCSSTransitionGroup extends React.Component {
++class ReactCSSTransitionGroup extends Component {
+   static displayName = 'ReactCSSTransitionGroup';
+ 
+-  static propTypes = {
+-    transitionName: ReactCSSTransitionGroupChild.propTypes.name,
+-
+-    transitionAppear: React.PropTypes.bool,
+-    transitionEnter: React.PropTypes.bool,
+-    transitionLeave: React.PropTypes.bool,
+-    transitionAppearTimeout: createTransitionTimeoutPropValidator('Appear'),
+-    transitionEnterTimeout: createTransitionTimeoutPropValidator('Enter'),
+-    transitionLeaveTimeout: createTransitionTimeoutPropValidator('Leave'),
+-  };
++  // static propTypes = {
++  //   transitionName: ReactCSSTransitionGroupChild.propTypes.name,
++  //
++  //   transitionAppear: React.PropTypes.bool,
++  //   transitionEnter: React.PropTypes.bool,
++  //   transitionLeave: React.PropTypes.bool,
++  //   transitionAppearTimeout: createTransitionTimeoutPropValidator('Appear'),
++  //   transitionEnterTimeout: createTransitionTimeoutPropValidator('Enter'),
++  //   transitionLeaveTimeout: createTransitionTimeoutPropValidator('Leave'),
++  // };
+ 
+   static defaultProps = {
+     transitionAppear: false,
+@@ -70,7 +70,7 @@
+     // We need to provide this childFactory so that
+     // ReactCSSTransitionGroupChild can receive updates to name, enter, and
+     // leave while it is leaving.
+-    return React.createElement(
++    return h(
+       ReactCSSTransitionGroupChild,
+       {
+         name: this.props.transitionName,
+@@ -86,11 +86,11 @@
+   };
+ 
+   render() {
+-    return React.createElement(
++    return h(
+       ReactTransitionGroup,
+       Object.assign({}, this.props, {childFactory: this._wrapChild})
+     );
+   }
+ }
+ 
+-module.exports = ReactCSSTransitionGroup;
++export default ReactCSSTransitionGroup;

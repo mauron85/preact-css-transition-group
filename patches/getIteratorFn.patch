@@ -1,0 +1,8 @@
+--- src-react/getIteratorFn.js	2017-03-22 11:50:13.071911607 +0100
++++ src/getIteratorFn.js	2017-03-22 11:51:02.072450036 +0100
+@@ -40,4 +40,4 @@
+   }
+ }
+ 
+-module.exports = getIteratorFn;
++export default getIteratorFn;

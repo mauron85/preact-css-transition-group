@@ -1,0 +1,17 @@
+--- src-react/getVendorPrefixedEventName.js	2017-03-22 11:50:14.211831070 +0100
++++ src/getVendorPrefixedEventName.js	2017-03-22 11:51:02.072450036 +0100
+@@ -11,7 +11,7 @@
+ 
+ 'use strict';
+ 
+-var ExecutionEnvironment = require('ExecutionEnvironment');
++import ExecutionEnvironment from 'fbjs/lib/ExecutionEnvironment';
+ 
+ /**
+  * Generate a mapping of standard vendor prefixes using the defined style property and event name.
+@@ -99,4 +99,4 @@
+   return '';
+ }
+ 
+-module.exports = getVendorPrefixedEventName;
++export default getVendorPrefixedEventName;

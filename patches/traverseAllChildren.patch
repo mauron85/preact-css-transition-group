@@ -1,0 +1,32 @@
+--- src-react/traverseAllChildren.js	2017-03-22 11:50:15.363749685 +0100
++++ src/traverseAllChildren.js	2017-03-22 11:51:02.072450036 +0100
+@@ -11,13 +11,17 @@
+ 
+ 'use strict';
+ 
+-var ReactCurrentOwner = require('ReactCurrentOwner');
+-var REACT_ELEMENT_TYPE = require('ReactElementSymbol');
++// TODO:
++//import ReactCurrentOwner from 'ReactCurrentOwner';
++//import REACT_ELEMENT_TYPE from 'ReactElementSymbol';
++
++import getIteratorFn from './getIteratorFn';
++import invariant from './invariant';
++import KeyEscapeUtils from './KeyEscapeUtils';
++import warning from './warning';
+ 
+-var getIteratorFn = require('getIteratorFn');
+-var invariant = require('invariant');
+-var KeyEscapeUtils = require('KeyEscapeUtils');
+-var warning = require('warning');
++var ReactCurrentOwner;
++var REACT_ELEMENT_TYPE;
+ 
+ var SEPARATOR = '.';
+ var SUBSEPARATOR = ':';
+@@ -218,4 +222,4 @@
+   return traverseAllChildrenImpl(children, '', callback, traverseContext);
+ }
+ 
+-module.exports = traverseAllChildren;
++export default traverseAllChildren;
