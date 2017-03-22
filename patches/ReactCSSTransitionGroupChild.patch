@@ -1,13 +1,13 @@
---- src-react/ReactCSSTransitionGroupChild.js	2017-03-22 11:50:16.519668018 +0100
-+++ src/ReactCSSTransitionGroupChild.js	2017-03-22 11:51:02.072450036 +0100
-@@ -11,50 +11,48 @@
+--- src-react/ReactCSSTransitionGroupChild.js	2017-03-22 16:58:47.000000000 +0100
++++ src/ReactCSSTransitionGroupChild.js	2017-03-22 21:53:19.000000000 +0100
+@@ -11,50 +11,52 @@
  
  'use strict';
  
 -var React = require('React');
 -var ReactAddonsDOMDependencies = require('ReactAddonsDOMDependencies');
 +import { Component, cloneElement } from 'preact';
-+import { onlyChild } from './utils';
++import { onlyChild, getComponentBase } from './utils';
  
 -var CSSCore = require('CSSCore');
 -var ReactTransitionEvents = require('ReactTransitionEvents');
@@ -79,6 +79,10 @@
 +  //   enterTimeout: React.PropTypes.number,
 +  //   leaveTimeout: React.PropTypes.number,
 +  // };
++  constructor(props) {
++    super(props);
++		this.flushClassNameAndNodeQueue = this.flushClassNameAndNodeQueue.bind(this);
++	}
  
 -  transition: function(animationType, finishCallback, userSpecifiedDelay) {
 -    var node = ReactAddonsDOMDependencies.getReactDOM().findDOMNode(this);
@@ -87,7 +91,7 @@
  
      if (!node) {
        if (finishCallback) {
-@@ -100,9 +98,9 @@
+@@ -100,9 +102,9 @@
        // DEPRECATED: this listener will be removed in a future version of react
        ReactTransitionEvents.addEndEventListener(node, endListener);
      }
@@ -99,7 +103,7 @@
      this.classNameAndNodeQueue.push({
        className: className,
        node: node,
-@@ -111,9 +109,9 @@
+@@ -111,24 +113,24 @@
      if (!this.timeout) {
        this.timeout = setTimeout(this.flushClassNameAndNodeQueue, TICK);
      }
@@ -107,11 +111,12 @@
 +  }
  
 -  flushClassNameAndNodeQueue: function() {
+-    if (this.isMounted()) {
 +  flushClassNameAndNodeQueue() {
-     if (this.isMounted()) {
++    if (getComponentBase(this)) {
        this.classNameAndNodeQueue.forEach(function(obj) {
          CSSCore.addClass(obj.node, obj.className);
-@@ -121,14 +119,14 @@
+       });
      }
      this.classNameAndNodeQueue.length = 0;
      this.timeout = null;
@@ -130,7 +135,7 @@
      if (this.timeout) {
        clearTimeout(this.timeout);
      }
-@@ -137,35 +135,35 @@
+@@ -137,35 +139,35 @@
      });
  
      this.classNameAndNodeQueue.length = 0;

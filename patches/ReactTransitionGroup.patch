@@ -1,6 +1,6 @@
---- src-react/ReactTransitionGroup.js	2017-03-22 11:50:18.255545376 +0100
-+++ src/ReactTransitionGroup.js	2017-03-22 11:51:02.072450036 +0100
-@@ -11,23 +11,23 @@
+--- src-react/ReactTransitionGroup.js	2017-03-22 16:58:47.000000000 +0100
++++ src/ReactTransitionGroup.js	2017-03-22 21:44:09.000000000 +0100
+@@ -11,33 +11,42 @@
  
  'use strict';
  
@@ -11,6 +11,7 @@
  
 -var emptyFunction = require('emptyFunction');
 +import emptyFunction from 'fbjs/lib/emptyFunction';
++import { getKey } from './utils';
  
  /**
   * A basis for animations. When children are declaratively added or removed,
@@ -32,16 +33,53 @@
  
    static defaultProps = {
      component: 'span',
-@@ -213,7 +213,7 @@
+     childFactory: emptyFunction.thatReturnsArgument,
+   };
+ 
+-  state = {
+-    // TODO: can we get useful debug information to show at this point?
+-    children: ReactTransitionChildMapping.getChildMapping(this.props.children),
+-  };
++  // state = {
++  //   // TODO: can we get useful debug information to show at this point?
++  //   children: ReactTransitionChildMapping.getChildMapping(this.props.children),
++  // };
++
++  constructor(props) {
++		super();
++		this.refs = {};
++    this.state = {
++			children: (props.children || []).slice()
++		};
++	}
+ 
+   componentWillMount() {
+     this.currentlyTransitioningKeys = {};
+@@ -207,15 +216,21 @@
+     var childrenToRender = [];
+     for (var key in this.state.children) {
+       var child = this.state.children[key];
++
+       if (child) {
+         // You may need to apply reactive updates to a child as it is leaving.
+         // The normal React way to do it won't work since the child will have
          // already been removed. In case you need this behavior you can provide
          // a childFactory function to wrap every child, even the ones that are
          // leaving.
 -        childrenToRender.push(React.cloneElement(
 +        childrenToRender.push(cloneElement(
            this.props.childFactory(child),
-           {ref: key, key: key}
+-          {ref: key, key: key}
++          {
++            ref: c => {
++              if (!(this.refs[key] = c)) child = null;
++            },
++            key: key
++          }
          ));
-@@ -232,7 +232,7 @@
+       }
+     }
+@@ -232,7 +247,7 @@
      delete props.transitionAppearTimeout;
      delete props.component;
  
@@ -50,7 +88,7 @@
        this.props.component,
        props,
        childrenToRender
-@@ -240,4 +240,4 @@
+@@ -240,4 +255,4 @@
    }
  }
  
