@@ -1,5 +1,5 @@
---- src-react/flattenChildren.js	2017-03-22 11:50:14.783790660 +0100
-+++ src/flattenChildren.js	2017-03-22 11:51:02.072450036 +0100
+--- src-react/flattenChildren.js	2017-03-22 13:53:46.419278711 +0100
++++ src/flattenChildren.js	2017-03-22 14:33:15.957383210 +0100
 @@ -12,9 +12,9 @@
  
  'use strict';
@@ -9,7 +9,7 @@
 -var warning = require('warning');
 +import KeyEscapeUtils from './KeyEscapeUtils';
 +import traverseAllChildren from './traverseAllChildren';
-+import warning from './warning';
++import warning from 'fbjs/lib/warning';
  
  var ReactComponentTreeHook;
  
