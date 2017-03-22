@@ -37,14 +37,18 @@ export default {
 		replace({
 			'__DEV__': false
 		}),
+		alias({
+			// force fbjs to use our modules
+			'./invariant': './../../../src/invariant',
+			'./warning': './../../../src/warning',
+			'fbjs/lib/invariant': './invariant',
+			'fbjs/lib/warning': './warning',
+			resolve: ['.js']
+		}),
 		nodeResolve({
 			jsnext: true,
 			main: true,
 			skip: external
-		}),
-		alias({
-			'./invariant': './src/invariant',
-			'./warning': './src/warning'
 		}),
 		commonjs({
 			include: 'node_modules/**',
